@@ -1,0 +1,21 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100px, 100%), 1fr));
+  gap: 10px;
+}
+
+.grid-element {
+  width: 100px;
+  height: 50px;
+}
+
+.exist {
+  background-color: blue;
+  cursor: pointer;
+}
+.exist.clicked {
+  background-color: black;
+  color: white;
+}

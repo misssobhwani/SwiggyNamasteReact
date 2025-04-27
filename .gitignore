@@ -1,0 +1,13 @@
+# Ignore node modules
+node_modules/
+
+# Ignore Parcel cache and build folders
+.parcel-cache/
+dist/
+
+# Ignore log files and system files
+*.log
+.DS_Store
+
+# Ignore parcel source maps
+*.map
