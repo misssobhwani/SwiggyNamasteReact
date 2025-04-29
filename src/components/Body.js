@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard , {withpromotedRestrauntCard}from "./RestaurantCard";
 // import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import ShimmerContainer from "./ShimmerContainer";
@@ -11,7 +11,8 @@ console.log(responseData);
 const [searchText, setSearchText] = useState("");
 const [listRes,setListRes]= useState([])   //whenever a state variable changes react rerenders the component
 const [filteredList,setFilteredList]= useState([])
-
+//HOC
+const RestaurantCardPromoted = withpromotedRestrauntCard(RestaurantCard)
 // const data1 = useFetchdataApi()
 useEffect(()=>{
 fetchApidata();
@@ -50,7 +51,7 @@ const handleSearchClick = () => {
   setFilteredList(filteredList);
   console.log(filteredList);
 }
-  
+  console.log(filteredList + "FL");
 const onlineStatus = useOnlineStatus();
 
 if(onlineStatus === false) return <h1>Looks like you are offline. please check youtr internet connection</h1>
@@ -72,8 +73,19 @@ if(onlineStatus === false) return <h1>Looks like you are offline. please check y
         
         <div className="res-container">
           {filteredList.map((resDataInfo) => (
-           <Link key={resDataInfo.info.id} to={"/restaurants/"+resDataInfo.info.id} > <RestaurantCard key={resDataInfo.info.id} resData={resDataInfo} /></Link>
+           <Link key={resDataInfo.info.id} to={"/restaurants/"+resDataInfo.info.id} > {resDataInfo.info.aggregatedDiscountInfoV3?.header ? <RestaurantCardPromoted key={resDataInfo.info.id} resData={resDataInfo} /> : <RestaurantCard key={resDataInfo.info.id} resData={resDataInfo} /> } </Link>
           ))}
+          {/* {filteredList.map((resDataInfo) => {
+    console.log(resDataInfo);  // 👈 Logging here
+    return (
+      <Link key={resDataInfo.info.id} to={"/restaurants/" + resDataInfo.info.id}>
+        {resDataInfo.info.aggregatedDiscountInfoV3?.header
+          ? <RestaurantCardPromoted key={resDataInfo.info.id} resData={resDataInfo} /> 
+          : <RestaurantCard key={resDataInfo.info.id} resData={resDataInfo} />
+        }
+      </Link>
+    );
+  })} */}
         </div>
       </div>
     );

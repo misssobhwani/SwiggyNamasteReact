@@ -23,4 +23,32 @@ const RestaurantCard = (props) => {
     );
   };
 
+  //input -> Restaurant Card output => promoted Restaurant card
+
+  
+
+  // export const withpromotedRestrauntCard = (RestaurantCard) => {
+  //   return (props) => {
+  //     return (
+  //       <div>
+  //         <label>Promoted</label>
+  //         <RestaurantCard {...props} />
+  //       </div>
+  //     );
+  //   };
+  // };
+
+  export function withpromotedRestrauntCard(RestaurantCard) {
+     function WrappedComponent(props) {
+      return (
+        <div>
+          <label>Promoted</label>
+          <RestaurantCard {...props} />
+        </div>
+      );
+    };
+    return WrappedComponent
+  }
+  
+
 export default RestaurantCard;
